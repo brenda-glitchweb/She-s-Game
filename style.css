@@ -1,0 +1,643 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+.universe {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #171033 0%,
+            #080817 35%,
+            #020208 65%,
+            #000000 100%
+        );
+}
+
+
+/* =================================
+   BIRTH GLOW
+================================= */
+
+.birth-glow {
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(100, 70, 255, 0.35),
+            rgba(80, 30, 180, 0.12),
+            transparent 70%
+        );
+
+    filter: blur(20px);
+
+    animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+
+    0%, 100% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.8);
+
+        opacity: 0.5;
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.3);
+
+        opacity: 1;
+    }
+}
+
+
+/* =================================
+   FIRST LIGHT
+================================= */
+
+.first-light {
+    position: absolute;
+
+    width: 6px;
+    height: 6px;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 8px white,
+        0 0 20px #9d8cff,
+        0 0 40px #735cff;
+
+    opacity: 0;
+
+    animation:
+        firstLight 5s ease-in-out forwards;
+}
+
+@keyframes firstLight {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+
+    40% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0);
+    }
+
+    60% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.5);
+    }
+}
+
+
+/* =================================
+   ENERGY WAVE
+================================= */
+
+.energy-wave {
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(180, 160, 255, 0.8);
+
+    box-shadow:
+        0 0 15px rgba(150, 130, 255, 0.8),
+        0 0 40px rgba(100, 80, 255, 0.5);
+
+    opacity: 0;
+
+    animation:
+        universeBirth 5s ease-out 5s forwards;
+}
+
+@keyframes universeBirth {
+
+    0% {
+        width: 20px;
+        height: 20px;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0.7;
+    }
+
+    100% {
+        width: 900px;
+        height: 900px;
+        opacity: 0;
+    }
+}
+
+
+/* =================================
+   BACKGROUND STARS
+================================= */
+
+.background-stars {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    z-index: 0;
+
+    opacity: 0;
+
+    transition:
+        opacity 4s ease-in-out;
+}
+
+
+.background-stars.visible {
+    opacity: 1;
+}
+
+
+.background-star {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: 0.35;
+}
+
+
+/* =================================
+   GALAXY LAYER
+================================= */
+
+.galaxy-layer {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    top: 0;
+    left: 0;
+
+    transform: scale(1);
+
+    transform-origin:
+        50% 50%;
+
+    transition:
+        transform 7s ease-in-out;
+
+    z-index: 1;
+}
+
+
+/* =================================
+   GALAXY MOVES FAR AWAY
+================================= */
+
+.galaxy-layer.distant {
+    transform: scale(0.22);
+}
+
+
+/* =================================
+   GALAXY STARS
+================================= */
+
+.particle {
+    position: absolute;
+
+    width: 2px;
+    height: 2px;
+
+    top: 50%;
+    left: 50%;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.82);
+
+    transform:
+        translate(-50%, -50%)
+        translate(0, 0)
+        scale(0);
+
+    opacity: 0;
+
+    animation:
+        particleAppear 4s ease-out 8s forwards;
+
+    will-change: transform;
+}
+
+
+/* =================================
+   ONLY SOME STARS GLOW
+================================= */
+
+.particle.glow {
+    background: white;
+
+    box-shadow:
+        0 0 5px white,
+        0 0 10px rgba(150, 130, 255, 0.8);
+}
+
+
+/* =================================
+   A FEW SMALLER STARS
+================================= */
+
+.particle.small {
+    width: 1px;
+    height: 1px;
+}
+
+
+/* =================================
+   PARTICLE APPEARANCE
+================================= */
+
+@keyframes particleAppear {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            translate(0, 0)
+            scale(0);
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.85;
+
+        transform:
+            translate(-50%, -50%)
+            translate(var(--x), var(--y))
+            scale(1);
+    }
+}
+
+
+/* =================================
+   GALAXY MODE
+================================= */
+
+.galaxy-mode .particle {
+    animation: none;
+    opacity: 0.85;
+}
+
+
+/* =================================
+   COSMIC FOG
+================================= */
+
+.cosmic-fog {
+    position: absolute;
+
+    width: 160%;
+    height: 100%;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-12deg);
+
+    background:
+
+        radial-gradient(
+            ellipse 55% 10% at 18% 35%,
+            rgba(100, 180, 255, 0.11),
+            transparent 70%
+        ),
+
+        radial-gradient(
+            ellipse 45% 12% at 48% 48%,
+            rgba(155, 110, 255, 0.10),
+            transparent 70%
+        ),
+
+        radial-gradient(
+            ellipse 50% 9% at 75% 60%,
+            rgba(90, 170, 255, 0.09),
+            transparent 70%
+        ),
+
+        radial-gradient(
+            ellipse 60% 8% at 85% 30%,
+            rgba(190, 130, 255, 0.07),
+            transparent 70%
+        );
+
+    filter: blur(35px);
+
+    opacity: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 8s ease-in-out;
+}
+
+
+/* =================================
+   FOG APPEARS
+================================= */
+
+.cosmic-fog.visible {
+    opacity: 1;
+}
+
+
+/* =================================
+   DISTANT PLANETS
+================================= */
+
+.planets {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+
+/* =================================
+   PLANET
+================================= */
+
+.planet {
+    position: absolute;
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    transform: scale(0);
+
+    transition:
+        opacity 3s ease,
+        transform 4s ease;
+
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            rgba(255, 255, 255, 0.95),
+            rgba(180, 210, 255, 0.82) 18%,
+            rgba(90, 110, 180, 0.9) 48%,
+            rgba(20, 25, 60, 0.98) 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(150, 185, 255, 0.5),
+        0 0 18px rgba(120, 160, 255, 0.28);
+}
+
+
+/* =================================
+   PLANET VARIATIONS
+================================= */
+
+.planet.purple {
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            rgba(255, 255, 255, 0.75),
+            rgba(190, 160, 255, 0.7) 20%,
+            rgba(100, 70, 150, 0.8) 50%,
+            rgba(25, 15, 50, 0.95) 100%
+        );
+}
+
+
+.planet.blue {
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(230, 250, 255, 0.8),
+            rgba(100, 180, 255, 0.7) 22%,
+            rgba(35, 80, 150, 0.85) 55%,
+            rgba(5, 15, 35, 0.98) 100%
+        );
+}
+
+
+.planet.cold {
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255, 255, 255, 0.7),
+            rgba(180, 220, 255, 0.65) 20%,
+            rgba(70, 100, 145, 0.75) 55%,
+            rgba(15, 25, 40, 0.95) 100%
+        );
+}
+
+
+/* =================================
+   SATURN-LIKE RING
+================================= */
+
+.planet-ring {
+    position: absolute;
+
+    width: 190%;
+    height: 55%;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotateX(65deg);
+
+    transform-origin: center;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(210, 225, 255, 0.7);
+
+    box-shadow:
+        0 0 4px rgba(180, 205, 255, 0.5),
+        0 0 9px rgba(130, 160, 255, 0.3);
+
+    pointer-events: none;
+
+    z-index: 2;
+
+    animation: none;
+}
+
+
+/* =================================
+   RING ROTATION
+================================= */
+
+@keyframes ringSpin {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotateX(65deg)
+            rotateZ(0deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotateX(65deg)
+            rotateZ(360deg);
+    }
+}
+
+
+/* =================================
+   PLANETS APPEAR
+================================= */
+
+.planet.visible {
+    opacity: var(--planet-opacity);
+
+    transform: scale(1);
+}
+
+
+/* =================================
+   DISTANT MOON
+================================= */
+
+.moon {
+    position: absolute;
+
+    width: 24px;
+    height: 24px;
+
+    left: 78%;
+    top: 20%;
+
+    border-radius: 50%;
+
+    opacity: 0;
+
+    transform: scale(0);
+
+    z-index: 2;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff 0%,
+            #eaf3ff 20%,
+            #c5d5e8 45%,
+            #71839d 72%,
+            #293448 100%
+        );
+
+    box-shadow:
+        0 0 8px rgba(210, 230, 255, 0.65),
+        0 0 20px rgba(150, 190, 255, 0.45),
+        0 0 40px rgba(120, 160, 255, 0.22);
+
+    transition:
+        opacity 4s ease,
+        transform 5s ease;
+}
+
+
+/* =================================
+   MOON APPEARS
+================================= */
+
+.moon.visible {
+    opacity: 0.95;
+
+    transform: scale(1);
+}
+
